@@ -1,74 +1,86 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Tee Times API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Overview
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+The Tee Times API allows fetching tee time data from golf course websites using a flexible and generic approach. The solution is designed to be scalable and maintainable, accommodating multiple golf course sites with minimal code changes.
 
-## Description
+## Documentation
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+You can access the API documentation at the `/api` endpoint.
 
-## Installation
+## Architecture and Design
 
-```bash
-$ npm install
-```
+### Golf Course Service
 
-## Running the app
+The core of the API is the `GolfCourseService` abstract class, which defines the common operations for golf course services. This class provides a standard interface for fetching tee times, making it adaptable to various golf course sites.
 
-```bash
-# development
-$ npm run start
+### Club Prophet Integration
 
-# watch mode
-$ npm run start:dev
+Club Prophet is a system used by several golf courses to manage tee times. The `ClubProphetService` abstract class extends the `GolfCourseService` and implements specific integrations with the Club Prophet system. This allows for a unified approach to interacting with Club Prophet-based sites.
 
-# production mode
-$ npm run start:prod
-```
+#### Example: Indian Tree and Olde Course
 
-## Test
+- **Indian Tree Golf Club** and **The Olde Course at Loveland** both use the Club Prophet system. The `IndianTreeService` and `OldeCourseService` classes extend the `ClubProphetService`, inheriting its methods and adding site-specific configurations.
+- The `IndianTreeService` and `OldeCourseService` classes handle the unique identifiers and endpoints for their respective sites, but otherwise follow the same structure defined by `ClubProphetService`.
+
+### Extending to New Sites
+
+To add a new Club Prophet-based golf course site, create a new service class extending `ClubProphetService`. Implement site-specific configurations and API endpoints, while reusing the generic methods provided by `ClubProphetService`.
+
+## Setup and Installation
+
+### Prerequisites
+
+- Node.js (version 18.x or later recommended)
+- Docker (optional for running in a container)
+
+### Installation
+
+1. Clone the repository and navigate to the project directory:
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+git clone https://github.com/robertos95/teebox-test.git
+cd teebox-test
 ```
 
-## Support
+2. Install dependencies:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```bash
+npm install
+```
 
-## Stay in touch
+3. Set up environment variables (already set up as .env file is committed)
+   Environment variables are intentionally committed for this test for easier setup.
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## Running the Application
 
-## License
+To run the application locally:
 
-Nest is [MIT licensed](LICENSE).
-# teebox-test
+1. **Start the Application:**
+
+```bash
+npm run start
+```
+
+## Docker Setup
+
+To run the application using Docker:
+
+1. **Pull the Docker Image from Docker Hub:**
+
+```bash
+docker pull robertosalim/teebox-test
+```
+
+2. Run the Docker Container:
+
+```bash
+docker run -p 3000:3000 robertosalim/teebox-test
+```
+
+3. The endpoint is available under port 3000 on localhost. Example GET to `http://localhost:3000/teeTimes?date=2024-08-07`.
+
+## Notes
+
+- **Error Handling:** Basic error handling is implemented with console logs for scenarios such as unavailable data or site errors.
+- **Scalability:** The solution is designed to easily incorporate new golf course sites with minimal changes.

@@ -11,7 +11,11 @@ export class TeeTimesController {
   constructor(private readonly teeTimesService: TeeTimesService) {}
 
   @Get()
-  @ApiOperation({ summary: 'Get tee times' })
+  @ApiOperation({
+    summary: 'Get tee times',
+    description:
+      'Fetch tee times from golf course services on a specific date. It supports data fetching from an individual site or multiple sites.',
+  })
   @ApiQuery({
     name: 'siteIds',
     required: false,
