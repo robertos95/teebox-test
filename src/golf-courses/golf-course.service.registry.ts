@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { GolfCourseServiceIds } from '../tee-times/enums/golf-course-service-id.enum';
 import { IndianTreeService } from './club-prophets/indian-tree.service';
-import { OldeCourseService } from './club-prophets/olde-course.service copy';
+import { OldeCourseService } from './club-prophets/olde-course.service';
 import { GolfCourseService } from './golf-course.abstract.service';
 
 @Injectable()

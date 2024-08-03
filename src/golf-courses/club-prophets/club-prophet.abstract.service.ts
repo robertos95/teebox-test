@@ -59,7 +59,7 @@ export abstract class ClubProphetService extends GolfCourseService {
 
       return this.normalizeResponse(response.data);
     } catch (error) {
-      console.error(`Failed to fetch tee times from ${this.name}: ${error}`);
+      console.log(`Failed to fetch tee times from ${this.name}: ${error}`);
       return [];
     }
   }

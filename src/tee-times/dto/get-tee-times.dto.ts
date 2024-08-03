@@ -5,6 +5,7 @@ import {
   IsOptional,
   IsString,
   Matches,
+  Min,
 } from 'class-validator';
 
 export class GetTeeTimesDto {
@@ -22,5 +23,6 @@ export class GetTeeTimesDto {
   @IsOptional()
   @IsNumber()
   @Type(() => Number)
+  @Min(0)
   players = 0;
 }

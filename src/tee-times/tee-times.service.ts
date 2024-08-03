@@ -23,7 +23,7 @@ export class TeeTimesService {
       try {
         return await service.fetchTeeTimes(date, players);
       } catch (error) {
-        console.error(
+        console.log(
           `Failed to fetch tee times from service ${service.name}: ${error.message}`,
         );
         return []; // Return empty array if there's error from the site
