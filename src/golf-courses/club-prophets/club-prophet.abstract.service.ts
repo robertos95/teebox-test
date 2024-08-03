@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { TeeTime } from '../../tee-times/interfaces/tee-time.interface';
+import { TeeTimeDto } from '../../tee-times/dto/tee-time.dto';
 import { GolfCourseService } from '../golf-course.abstract.service';
 
 export abstract class ClubProphetService extends GolfCourseService {
@@ -42,7 +42,7 @@ export abstract class ClubProphetService extends GolfCourseService {
   }
 
   // Shared method for fetching tee times with CP-specific logic
-  async fetchTeeTimes(date: string, players = 0): Promise<TeeTime[]> {
+  async fetchTeeTimes(date: string, players = 0): Promise<TeeTimeDto[]> {
     const formattedDate = new Date(date).toDateString();
 
     const params = {
@@ -64,8 +64,8 @@ export abstract class ClubProphetService extends GolfCourseService {
     }
   }
 
-  protected normalizeResponse(data: any[]): TeeTime[] {
-    const teeTimes: TeeTime[] = [];
+  protected normalizeResponse(data: any[]): TeeTimeDto[] {
+    const teeTimes: TeeTimeDto[] = [];
 
     data.forEach((item) => {
       // Iterate over each item in shItemPrices to create a separate TeeTime entry

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { TeeTime } from '../../tee-times/interfaces/tee-time.interface';
+import { TeeTimeDto } from '../../tee-times/dto/tee-time.dto';
 import { OldeCourseService } from './olde-course.service';
 
 jest.mock('axios');
@@ -31,7 +31,7 @@ describe('OldeCourseService', () => {
     mockedAxios.get.mockResolvedValue({ data: mockData });
 
     // Expected normalized tee times
-    const expectedTeeTimes: TeeTime[] = [
+    const expectedTeeTimes: TeeTimeDto[] = [
       {
         courseId: '2',
         courseName: 'The Olde Course',

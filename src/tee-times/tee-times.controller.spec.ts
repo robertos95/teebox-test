@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { GetTeeTimesDto } from './dto/get-tee-times.dto';
-import { TeeTime } from './interfaces/tee-time.interface';
+import { TeeTimeDto } from './dto/tee-time.dto';
 import { TeeTimesController } from './tee-times.controller';
 import { TeeTimesService } from './tee-times.service';
 
@@ -33,7 +33,7 @@ describe('TeeTimesController', () => {
       date: '2024-08-03',
       players: 1,
     };
-    const mockTeeTimes: TeeTime[] = [
+    const mockTeeTimes: TeeTimeDto[] = [
       {
         courseId: '1',
         courseName: 'Mock Course',

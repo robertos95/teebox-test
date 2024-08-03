@@ -1,4 +1,4 @@
-import { TeeTime } from '../tee-times/interfaces/tee-time.interface';
+import { TeeTimeDto } from '../tee-times/dto/tee-time.dto';
 
 export abstract class GolfCourseService {
   public name: string;
@@ -21,7 +21,7 @@ export abstract class GolfCourseService {
     this.baseParams = baseParams;
   }
 
-  abstract fetchTeeTimes(date: string, players: number): Promise<TeeTime[]>;
+  abstract fetchTeeTimes(date: string, players: number): Promise<TeeTimeDto[]>;
 
-  protected abstract normalizeResponse(response: any): TeeTime[];
+  protected abstract normalizeResponse(response: any): TeeTimeDto[];
 }

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { GolfCourseService } from '../golf-courses/golf-course.abstract.service';
 import { GolfCourseServiceRegistry } from '../golf-courses/golf-course.service.registry';
 import { GetTeeTimesDto } from './dto/get-tee-times.dto';
-import { TeeTime } from './interfaces/tee-time.interface';
+import { TeeTimeDto } from './dto/tee-time.dto';
 
 @Injectable()
 export class TeeTimesService {
@@ -14,7 +14,7 @@ export class TeeTimesService {
       : this.serviceRegistry.getAllServices();
   }
 
-  async getTeeTimes(getTeeTimesDto: GetTeeTimesDto): Promise<TeeTime[]> {
+  async getTeeTimes(getTeeTimesDto: GetTeeTimesDto): Promise<TeeTimeDto[]> {
     const { siteIds, date, players } = getTeeTimesDto;
 
     const services = this.getServicesBySiteIds(siteIds);
