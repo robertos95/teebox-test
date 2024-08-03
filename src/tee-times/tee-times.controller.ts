@@ -1,11 +1,12 @@
 import { Controller, Get, Query } from '@nestjs/common';
-import { ApiOperation, ApiQuery, ApiResponse } from '@nestjs/swagger';
+import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { getSiteIdsEnumDescription } from '../util/helper';
 import { GetTeeTimesDto } from './dto/get-tee-times.dto';
 import { TeeTimeDto } from './dto/tee-time.dto';
 import { GolfCourseServiceIds } from './enums/golf-course-service-id.enum';
 import { TeeTimesService } from './tee-times.service';
 
+@ApiTags('teeTimes')
 @Controller('teeTimes')
 export class TeeTimesController {
   constructor(private readonly teeTimesService: TeeTimesService) {}
